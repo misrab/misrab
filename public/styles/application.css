@@ -1,0 +1,47 @@
+html, body {
+  height: 100%; }
+
+body {
+  word-wrap: break-word;
+  background-color: #c9ffe5;
+background-color: #333333;
+color: white;
+}
+
+.navbar {
+  padding: 10px 10%; }
+
+.container {
+  padding-bottom: 150px; }
+
+#content, .container {
+  min-height: 100%; }
+
+#footer {
+  position: relative;
+  font-size: 1.25em;
+  color: gray;
+  background-color: lightgray;
+  height: 80px;
+  padding: 20px 10%;
+  border-top: 1px solid gray; }
+
+.big_space_top {
+  margin-top: 30px;
+}
+
+
+
+.neural_dot {
+  position: absolute;
+  opacity: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0px 0px 20px whitesmoke;
+}
+
+#cyberdyne_logo {
+  position: absolute; width: 500px; height: 500px; left: 50%; top: 50%; margin-left: -250px; margin-top: -250px;
+}
