@@ -41,6 +41,14 @@ color: white;
   background-color: white;
   box-shadow: 0px 0px 20px whitesmoke;
 }
+.moon {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: whitesmoke;
+  box-shadow: 0px 0px 20px whitesmoke;
+}
 
 #cyberdyne_logo {
   position: absolute; width: 500px; height: 500px; left: 50%; top: 50%; margin-left: -250px; margin-top: -250px;
