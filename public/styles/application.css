@@ -1,12 +1,11 @@
+/* shared */
 html, body {
   height: 100%; }
 
 body {
   word-wrap: break-word;
-  background-color: #c9ffe5;
-background-color: #333333;
-color: white;
-}
+  background-color: #333333;
+  color: white; }
 
 .navbar {
   padding: 10px 10%; }
@@ -26,12 +25,7 @@ color: white;
   padding: 20px 10%;
   border-top: 1px solid gray; }
 
-.big_space_top {
-  margin-top: 30px;
-}
-
-
-
+/* admin */
 .neural_dot {
   position: absolute;
   opacity: 0;
@@ -39,8 +33,8 @@ color: white;
   height: 10px;
   border-radius: 5px;
   background-color: white;
-  box-shadow: 0px 0px 20px whitesmoke;
-}
+  box-shadow: 0px 0px 20px whitesmoke; }
+
 .moon {
   position: absolute;
   width: 60px;
@@ -48,8 +42,20 @@ color: white;
   border-radius: 30px;
   background-color: whitesmoke;
   box-shadow: 0px 0px 20px whitesmoke;
-}
+  cursor: pointer; }
+
+.moon:hover {
+  box-shadow: 0px 0px 20px cyan; }
 
 #cyberdyne_logo {
-  position: absolute; width: 500px; height: 500px; left: 50%; top: 50%; margin-left: -250px; margin-top: -250px;
-}
+  position: absolute;
+  width: 500px;
+  height: 375px;
+  margin-top: -132px;
+  left: 50%;
+  top: 50%;
+  margin-left: -250px; }
+
+/* generic */
+.big_space_top {
+  margin-top: 30px; }
