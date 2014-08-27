@@ -14,7 +14,7 @@ func main() {
 	m := martini.Classic()
 	m.Use(render.Renderer())
 
-	m.Get("/", func(r render.Render) {
+	m.Get(".*", func(r render.Render) {
 		//return "hi"
 		r.HTML(200, "index", nil)
 	})

@@ -45,7 +45,7 @@ app.config(function($routeProvider, $locationProvider) {
   .when('/admin/core', {
     templateUrl:  '/views/admin/core.html',
     controller:   "AdminCoreController" 
-  })
+  })  
   // admin for misrab.me
   // '/admin/misrab'
 

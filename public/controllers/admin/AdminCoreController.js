@@ -5,7 +5,7 @@ var app = angular.module('app');
 //     });
 
 
-app.controller('AdminMainController', function($scope) {
+app.controller('AdminCoreController', function($scope) {
 	init();
 
 	function init() {
