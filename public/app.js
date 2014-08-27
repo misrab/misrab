@@ -26,11 +26,33 @@ app.directive('ngEnter', function () {
 
 app.config(function($routeProvider, $locationProvider) {
   $routeProvider
+  // public routes
   .when('/', {
-    templateUrl:  '/views/admin/landing.html',
-    controller:   "AdminMainController" 
+    templateUrl:  '/views/personal/landing.html',
+    controller:   "PersonalLandingController" 
   })
+  // /blog/:id
+  // /fun
+  // also resume, each project link should be fine...
 
+  // admin routes
+  // admin landing/login
+  .when('/admin', {
+    templateUrl:  '/views/admin/landing.html',
+    controller:   "AdminLandingController" 
+  })
+  // admin core
+  .when('/admin/core', {
+    templateUrl:  '/views/admin/core.html',
+    controller:   "AdminCoreController" 
+  })
+  // admin for misrab.me
+  // '/admin/misrab'
+
+  // captain's log
+  //
+
+  // notetaking
 
   .otherwise({
     templateUrl: '/views/admin/landing.html'
