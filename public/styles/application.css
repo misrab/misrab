@@ -1,4 +1,4 @@
-/* shared */
+/* basic stuff */
 html, body {
   height: 100%; }
 
@@ -24,37 +24,6 @@ body {
   height: 80px;
   padding: 20px 10%;
   border-top: 1px solid gray; }
-
-/* admin */
-.neural_dot {
-  position: absolute;
-  opacity: 0;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: white;
-  box-shadow: 0px 0px 20px whitesmoke; }
-
-.moon {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
-  background-color: whitesmoke;
-  box-shadow: 0px 0px 20px whitesmoke;
-  cursor: pointer; }
-
-.moon:hover {
-  box-shadow: 0px 0px 20px cyan; }
-
-#cyberdyne_logo {
-  position: absolute;
-  width: 500px;
-  height: 375px;
-  margin-top: -132px;
-  left: 50%;
-  top: 50%;
-  margin-left: -250px; }
 
 /* generic */
 .big_space_top {

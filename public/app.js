@@ -37,14 +37,14 @@ app.config(function($routeProvider, $locationProvider) {
 
   // admin routes
   // admin landing/login
-  .when('/admin', {
-    templateUrl:  '/views/admin/landing.html',
-    controller:   "AdminLandingController" 
+  .when('/cyberdyne', {
+    templateUrl:  '/views/cyberdyne/landing.html',
+    controller:   "CyberdyneLandingController" 
   })
   // admin core
-  .when('/admin/core', {
-    templateUrl:  '/views/admin/core.html',
-    controller:   "AdminCoreController" 
+  .when('/cyberdyne/core', {
+    templateUrl:  '/views/cyberdyne/core.html',
+    controller:   "CyberdyneCoreController" 
   })  
   // admin for misrab.me
   // '/admin/misrab'
@@ -55,7 +55,8 @@ app.config(function($routeProvider, $locationProvider) {
   // notetaking
 
   .otherwise({
-    templateUrl: '/views/admin/landing.html'
+    templateUrl:  '/views/personal/landing.html',
+    controller:   "PersonalLandingController" 
   });
 
   // configure html5 to get links working on jsfiddle

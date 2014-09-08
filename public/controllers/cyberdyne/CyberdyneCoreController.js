@@ -5,7 +5,7 @@ var app = angular.module('app');
 //     });
 
 
-app.controller('AdminCoreController', function($scope) {
+app.controller('CyberdyneCoreController', function($scope) {
 	init();
 
 	function init() {

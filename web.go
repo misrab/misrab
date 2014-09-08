@@ -19,22 +19,20 @@ func main() {
 		r.HTML(200, "index", nil)
 	})
 
+
+	// APIs
+	// Cyberdyne
+	m.Post("/cyberdyne/api/v1/password", func(r render.Render) {
+		//return "hi"
+		r.JSON(200, "hoi")
+	})
+
+
+	// Not found
 	m.NotFound(func() string {
 		// handle 404
 		return "Sorry, that route doenst exist"
 	})
 
 	m.Run()
-
-	// r := gin.Default()
-	// r.LoadHTMLTemplates("templates/*")
-
-	// r.GET("/", func(c *gin.Context) {
- //        obj := gin.H{"title": "Bubbles"}
- //        c.HTML(200, "index.tmpl", obj)
- //    })
-
- //    // Listen and server on 0.0.0.0:8080
- //    log.Println("Listening on port 8080...")
- //    r.Run(":8000")
 }
