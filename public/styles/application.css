@@ -1,3 +1,4 @@
+@import url("http://fonts.googleapis.com/css?family=Lato");
 /* basic stuff */
 html, body {
   height: 100%; }
@@ -5,7 +6,8 @@ html, body {
 body {
   word-wrap: break-word;
   background-color: #333333;
-  color: white; }
+  color: white;
+  font-family: "Lato"; }
 
 .navbar {
   padding: 10px 10%; }
@@ -28,3 +30,6 @@ body {
 /* generic */
 .big_space_top {
   margin-top: 30px; }
+
+.medium_space_top {
+  margin-top: 20px; }

@@ -1,12 +1,15 @@
 package main
 
 import (
-	//"log"
+	"log"
 	// "strings"
 	
+	"encoding/base64"
 
 	"github.com/go-martini/martini"
+
 	"github.com/codegangsta/martini-contrib/render"
+	"github.com/martini-contrib/binding"
 )
 
 
@@ -22,9 +25,19 @@ func main() {
 
 	// APIs
 	// Cyberdyne
-	m.Post("/cyberdyne/api/v1/password", func(r render.Render) {
+	type PasswordForm struct {
+		Password string `form:"password"`
+	}
+	m.Post("/cyberdyne/api/v1/password", binding.Bind(PasswordForm{}), func(r render.Render, p PasswordForm) {
+		b, err := base64.StdEncoding.DecodeString(p.Password)
+		if err != nil { log.Println("Error decoding password...") }
+		password := string(b)
+
+		log.Println(p.Password)
+		log.Println(password)
+
 		//return "hi"
-		r.JSON(200, "hoi")
+		r.JSON(200, password)
 	})
 
 

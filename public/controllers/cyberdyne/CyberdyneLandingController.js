@@ -1,7 +1,7 @@
 var app = angular.module('app');
 
 
-app.controller('CyberdyneLandingController', function($scope) {
+app.controller('CyberdyneLandingController', function($scope, Base64) {
 	init();
 
 	function init() {
@@ -11,14 +11,15 @@ app.controller('CyberdyneLandingController', function($scope) {
 
 	function enterPassword() {
 		var data = {};
-		data.password = $('input[type="password"]').val();
+		data.password = Base64.encode($('input[type="password"]').val());
 
 		$.ajax({
 		  type: "POST",
 		  url: '/cyberdyne/api/v1/password',
 		  data: data,
 		  success: function(response) {
-		  	window.location.replace("/cyberdyne/core");
+		  	console.log(response);
+		  	//window.location.replace("/cyberdyne/core");
 		  },
 		  error: function() {
 		  	console.log("err");

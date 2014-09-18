@@ -1,4 +1,44 @@
-$personal-primary: white
+@mixin box-shadow($top, $left, $blur, $color, $inset:"")
+	-webkit-box-shadow: $top $left $blur $color #{$inset} 
+	-moz-box-shadow: $top $left $blur $color #{$inset} 
+	box-shadow: $top $left $blur $color #{$inset} 
+
+
+$personal-primary: #e7feff
+
+$personal-beige: #f5f5dc
+$personal-pink: #fe6f5e
+$personal-green: #7bb661
+$personal-banana: #ffbf00
 
 body
 	background-color: $personal-primary
+	color: #333
+
+.secondary
+	padding: 20px
+	margin-left: 5px
+	margin-right: 5px
+	margin-bottom: 30px
+	overflow-y: scroll
+	@include box-shadow(0, 0, 10px, #808080)
+
+.main
+	background-color: $personal-beige
+.blog
+	background-color: $personal-green
+
+	iframe
+		margin: 0 auto !important
+		background-color: white !important
+.projects
+	background-color: $personal-pink
+.fun
+	background-color: $personal-banana
+
+.white_box
+	text-align: center
+	background-color: #fff
+	padding: 10px
+	border-radius: 4px
+	margin: 15px auto
