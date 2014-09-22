@@ -23,15 +23,15 @@ body
 	overflow-y: scroll
 	@include box-shadow(0, 0, 10px, #808080)
 
-.main
+#main
 	background-color: $personal-beige
-.blog
+#blog
 	background-color: $personal-green
 
 	iframe
 		margin: 0 auto !important
 		background-color: white !important
-.projects
+#projects
 	background-color: $personal-pink
 .fun
 	background-color: $personal-banana
@@ -42,3 +42,14 @@ body
 	padding: 10px
 	border-radius: 4px
 	margin: 15px auto
+
+
+.nav_blog, .nav_projects, .nav_resume
+	font-size: 1.5em
+	cursor: pointer
+.nav_blog:hover, .nav_projects:hover, .nav_resume:hover
+	color: black
+.nav_blog
+	color: $personal-green
+.nav_projects
+	color: $personal-pink

@@ -31,17 +31,9 @@ app.controller('CyberdyneCoreController', function($scope) {
 
       // place div
       var moon = $('<div class="moon" data-tooltip="'+icons[index]+'"></div>');
-      $('body').append(moon);
-      // moon.css('left', x);
-      // moon.css('top', y);
+      $('#core').append(moon);
 
       var t = 0;
-      // setInterval(function() {
-      //   var x = w/2 + (r+padding)*Math.cos(2*Math.PI*(index/N) -t);
-      //   var y = h/2 + (r+padding)*Math.sin(2*Math.PI*(index/N) -t);
-      //   moon.animate({ left: x, top: y }, 100);
-      //   t += 0.005;
-      // }, 100);
     }
 
     $('.moon').each(function(i, v) {
@@ -90,7 +82,7 @@ app.controller('CyberdyneCoreController', function($scope) {
     el.css('left', x);
     el.css('top', y);
     //el.css('opacity', Math.random()/2);
-    $('body').append(el);
+    $('#core').append(el);
 
    // find radial difference
    var outx = (w-x) < w/2 ? w-x : -x;

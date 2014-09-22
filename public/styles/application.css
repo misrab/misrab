@@ -9,6 +9,9 @@ body {
   color: white;
   font-family: "Lato"; }
 
+a, a:hover {
+  text-decoration: none; }
+
 .navbar {
   padding: 10px 10%; }
 
@@ -33,3 +36,9 @@ body {
 
 .medium_space_top {
   margin-top: 20px; }
+
+.my_hide {
+  display: none; }
+
+.boxy {
+  border-radius: 0 !important; }

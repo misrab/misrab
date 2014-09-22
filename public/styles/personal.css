@@ -12,16 +12,16 @@ body {
   -moz-box-shadow: 0 0 10px gray ;
   box-shadow: 0 0 10px gray ; }
 
-.main {
+#main {
   background-color: beige; }
 
-.blog {
+#blog {
   background-color: #7bb661; }
-  .blog iframe {
+  #blog iframe {
     margin: 0 auto !important;
     background-color: white !important; }
 
-.projects {
+#projects {
   background-color: #fe6f5e; }
 
 .fun {
@@ -33,3 +33,16 @@ body {
   padding: 10px;
   border-radius: 4px;
   margin: 15px auto; }
+
+.nav_blog, .nav_projects, .nav_resume {
+  font-size: 1.5em;
+  cursor: pointer; }
+
+.nav_blog:hover, .nav_projects:hover, .nav_resume:hover {
+  color: black; }
+
+.nav_blog {
+  color: #7bb661; }
+
+.nav_projects {
+  color: #fe6f5e; }

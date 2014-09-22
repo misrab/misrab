@@ -3,7 +3,7 @@ var app = angular.module('app', [
 	'ngCookies',
   //'d3',
   //'hljs' // syntax highlighting in landing.html
-  //'http-auth-interceptor',
+  'http-auth-interceptor'
 	// 'angularFileUpload'
 ]);
 
@@ -24,41 +24,77 @@ app.directive('ngEnter', function () {
     };
 });
 
-app.config(function($routeProvider, $locationProvider) {
+app.config(function($routeProvider, $locationProvider, $httpProvider) {
   $routeProvider
-  // public routes
-  .when('/', {
-    templateUrl:  '/views/personal/landing.html',
-    controller:   "PersonalLandingController" 
-  })
-  // /blog/:id
-  // /fun
-  // also resume, each project link should be fine...
+    .when('/', {
+      templateUrl:  '/views/personal/landing.html',
+      controller:   "PersonalLandingController",
+      requireLogin: false
+    })
+    .when('/cyberdyne', {
+      templateUrl:  '/views/cyberdyne/landing.html',
+      controller:   "CyberdyneLandingController" ,
+      requireLogin: false
+    })
+    .when('/cyberdyne/core', {
+      templateUrl:  '/views/cyberdyne/core.html',
+      controller:   "CyberdyneCoreController",
+      requireLogin: true
+    })  
+    .otherwise({ redirectTo: '/' });
 
-  // admin routes
-  // admin landing/login
-  .when('/cyberdyne', {
-    templateUrl:  '/views/cyberdyne/landing.html',
-    controller:   "CyberdyneLandingController" 
-  })
-  // admin core
-  .when('/cyberdyne/core', {
-    templateUrl:  '/views/cyberdyne/core.html',
-    controller:   "CyberdyneCoreController" 
-  })  
-  // admin for misrab.me
-  // '/admin/misrab'
 
-  // captain's log
-  //
 
-  // notetaking
+  // 401 handling
+  var logsOutUserOn401 = ['$q', '$location', function ($q, $location) {
+    var success = function (response) {
+      return response;
+    };
 
-  .otherwise({
-    templateUrl:  '/views/personal/landing.html',
-    controller:   "PersonalLandingController" 
-  });
+    var error = function (response) {
+      if (response.status === 401) {
+        // display error
+        // $('.alert-danger').html('Invalid username or password');
+        // $('.alert-danger').show();
+        
+      //redirect them back to login page
+      $location.path('/');
+
+      return $q.reject(response);
+      } 
+      else {
+      return $q.reject(response);
+      }
+    };
+
+    return function (promise) {
+      return promise.then(success, error);
+    };
+  }];
 
   // configure html5 to get links working on jsfiddle
   $locationProvider.html5Mode(true);
+  $httpProvider.responseInterceptors.push(logsOutUserOn401);
+});
+
+
+app.run(function($rootScope, $location, $cookieStore) {
+
+  // Everytime the route in our app changes check auth status
+  $rootScope.$on("$routeChangeStart", function(event, next, current) {
+    $rootScope.key = $cookieStore.get("key") || null;
+    
+    if (next.requireLogin && !$rootScope.key) {
+      // clear cookie just in case mismatch
+      $cookieStore.remove('key');
+      
+      $location.path('/');
+      event.preventDefault();
+    }
+    // send to workspace if logged in and not in generic page
+    else if (!next.requireLogin && $rootScope.key) {
+      $location.path('/cyberdyne/core');
+      event.preventDefault();
+    }
+  });
 });
