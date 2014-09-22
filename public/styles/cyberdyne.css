@@ -1,3 +1,12 @@
+#notes {
+  background-color: #e2e2e2;
+  height: 100%;
+  min-height: 600px;
+  padding: 10px;
+  color: black;
+  border: 1px solid gray;
+  font-size: 1.25em; }
+
 .neural_dot {
   position: absolute;
   opacity: 0;

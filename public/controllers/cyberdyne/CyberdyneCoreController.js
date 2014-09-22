@@ -5,13 +5,26 @@ var app = angular.module('app');
 //     });
 
 
-app.controller('CyberdyneCoreController', function($scope) {
+app.controller('CyberdyneCoreController', function($scope, $http) {
 	init();
 
 	function init() {
-    effects();
-    icons();
+
+    setNotes();
+
+    $(function() {
+      effects();
+      icons();
+    });
+    
 	};
+
+  function setNotes() {
+    $http({method: 'GET', url: '/cyberdyne/api/v1/note'})
+      .success(function(data, status, headers, config) {
+        $("#notes").html(data);
+      });
+  }
 
 
 
@@ -22,7 +35,7 @@ app.controller('CyberdyneCoreController', function($scope) {
     var h = $(window).height();
     var r = $('#cyberdyne_logo').width()/2;
 
-    var icons = ["misrab.me", "hyperdrive", "captain\'s log", "stellar"];
+    var icons = ["analytics"];
     var N = icons.length;
     var padding = 30;
     for (index in icons) {

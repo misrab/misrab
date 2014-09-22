@@ -3,18 +3,26 @@
 
 <img src='/images/cyberdyne/cyberdyne.svg' id="cyberdyne_logo" />
 
-<div id="core">
+<div style="height: 100%;" id="core">
 	<div class="row text-center">
-		<div class="col-md-12">
+		<div style="position: relative;" class="col-md-12">
 			<h3>
 				Welcome to Cyberdyne Core
 			</h3>
-			<div id="tooltip"></div>
-
-
+			<div style="position: absolute;" id="tooltip"></div>
 			<div style="position: absolute; top: 10px; right: 0;">
 				<button ng-click="logout()" class="boxy btn btn-default">Logout</button>
 			</div>
+		</div>
+	</div>
+
+
+	<div style="height: 100%;" class="row big_space_top text-center">
+		<div class="col-md-4">
+			<h3>Notes</h3>
+			<div id="notes" contenteditable="true" class="text-left"></div>
+		</div>
+		<div class="col-md-8">
 		</div>
 	</div>
 </div>

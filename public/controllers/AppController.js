@@ -11,11 +11,12 @@ $cookieStore, Base64) {
 		$rootScope.setHttpBasicHeaders = setHttpBasicHeaders;
 		setHttpBasicHeaders();
 
-		// if ($rootScope.key) {
-		// 	$location.url('/cyberdyne/core');
-		// } else {
-		// 	$location.url('/cyberdyne');
-		// }
+		// $http({method: 'GET', url: '/lala'})
+		//   .success(function(data, status, headers, config) {
+		//     // this callback will be called asynchronously
+		//     // when the response is available
+		//     console.log("auth header was: " + String(data));
+		//   });
 	};
 
 
@@ -23,9 +24,11 @@ $cookieStore, Base64) {
 		var key = $cookieStore.get("key");
 
 		if (key === undefined || key === null) {
+			//$http.defaults.headers.common.Authorization
 			$http.defaults.headers.common.Authorization = 'Basic ';
 		} else {
 			var encoded = Base64.encode(key);
+			//$http.defaults.headers.common.Authorization 
 			$http.defaults.headers.common.Authorization = 'Basic ' + encoded;
 		}
 	};

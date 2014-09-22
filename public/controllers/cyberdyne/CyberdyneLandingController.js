@@ -19,8 +19,6 @@ app.controller('CyberdyneLandingController', function($location, $rootScope, $sc
 		}, 3000);
 	}
 	function enterPassword() {
-		var rs = $cookieStore;
-		var l = $location;
 		var data = {};
 		data.password = Base64.encode($('input[type="password"]').val());
 

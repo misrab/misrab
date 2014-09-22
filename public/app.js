@@ -25,6 +25,9 @@ app.directive('ngEnter', function () {
 });
 
 app.config(function($routeProvider, $locationProvider, $httpProvider) {
+  $locationProvider.html5Mode(true);
+
+
   $routeProvider
     .when('/', {
       templateUrl:  '/views/personal/landing.html',
@@ -72,17 +75,33 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
     };
   }];
 
+  // var setAuthHeader = ["$rootScope", "$cookieStore", "Base64", function($rootScope, $cookieStore, Base64) {
+  //   $rootScope.key = $cookieStore.get("key") || null;
+  //   if ($rootScope.key) {
+  //     var encoded = Base64.encode($rootScope.key);
+  //     $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
+  //   } else {
+  //     $http.defaults.headers.common.Authorization = 'Basic ';
+  //   }
+  // }];
+
   // configure html5 to get links working on jsfiddle
-  $locationProvider.html5Mode(true);
   $httpProvider.responseInterceptors.push(logsOutUserOn401);
+  // $httpProvider.interceptors.push(setAuthHeader);
 });
 
 
-app.run(function($rootScope, $location, $cookieStore) {
+app.run(function($rootScope, $location, $cookieStore, $http, Base64) {
 
   // Everytime the route in our app changes check auth status
   $rootScope.$on("$routeChangeStart", function(event, next, current) {
     $rootScope.key = $cookieStore.get("key") || null;
+    // if ($rootScope.key) {
+    //   var encoded = Base64.encode($rootScope.key);
+    //   $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
+    // } else {
+    //   $http.defaults.headers.common.Authorization = 'Basic ';
+    // }
     
     if (next.requireLogin && !$rootScope.key) {
       // clear cookie just in case mismatch
