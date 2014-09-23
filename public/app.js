@@ -111,7 +111,7 @@ app.run(function($rootScope, $location, $cookieStore, $http, Base64) {
       event.preventDefault();
     }
     // send to workspace if logged in and not in generic page
-    else if (!next.requireLogin && $rootScope.key) {
+    else if (!next.requireLogin && $rootScope.key && $location.path() != "/") {
       $location.path('/cyberdyne/core');
       event.preventDefault();
     }
