@@ -1,0 +1,39 @@
+{
+	"ImportPath": "github.com/Misrab/misrab",
+	"GoVersion": "go1.3",
+	"Deps": [
+		{
+			"ImportPath": "github.com/codegangsta/inject",
+			"Comment": "v1.0-rc1",
+			"Rev": "37d7f8432a3e684eef9b2edece76bdfa6ac85b39"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/martini",
+			"Comment": "v1.0-3-gadaa8f7",
+			"Rev": "adaa8f7fe1224a8f0fac72d23ee80c149b21f0fb"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/martini-contrib/render",
+			"Comment": "v0.1-159-g8ce6181",
+			"Rev": "8ce6181c2609699e4c7cd30994b76a850a9cdadc"
+		},
+		{
+			"ImportPath": "github.com/coopernurse/gorp",
+			"Comment": "v1.6.1",
+			"Rev": "31a7c02fabe8965c887cd243e381ce08328f3741"
+		},
+		{
+			"ImportPath": "github.com/go-martini/martini",
+			"Comment": "v1.0-3-gadaa8f7",
+			"Rev": "adaa8f7fe1224a8f0fac72d23ee80c149b21f0fb"
+		},
+		{
+			"ImportPath": "github.com/lib/pq",
+			"Rev": "50a04ed4e5268fb34ca6d885202b569ef89c0a7a"
+		},
+		{
+			"ImportPath": "github.com/martini-contrib/binding",
+			"Rev": "1928ed2850e7d65507ea4198d935597e43612c7d"
+		}
+	]
+}
