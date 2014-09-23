@@ -60,7 +60,7 @@ func pgConnect() *sql.DB {
 	var connection string
 	switch env {
 	case "staging":
-		connection = os.Getenv("HEROKU_POSTGRESQL_BLUE_URL")
+		connection = os.Getenv("HEROKU_POSTGRESQL_WHITE_URL")
 		break
 	//case "production":
 	// default to development
