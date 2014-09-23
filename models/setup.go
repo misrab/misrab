@@ -48,11 +48,11 @@ func SetupDB() *gorp.DbMap {
     // insert the one note for use
     // env := os.Getenv("ENV")
     // // if not staging
-    // if env != "staging" && env != "production" {
+    if env != "staging" && env != "production" {
     	n := new(Note)
 	   	err0 := dbmap.Insert(n)
 	   	PanicIf(err0)
-    // }
+    }
    	
 
     return dbmap
