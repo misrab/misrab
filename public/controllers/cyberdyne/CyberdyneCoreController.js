@@ -14,7 +14,7 @@ app.controller('CyberdyneCoreController', function($scope, $http) {
 
     $(function() {
       effects();
-      icons();
+      //icons();
     });
     
 	};
