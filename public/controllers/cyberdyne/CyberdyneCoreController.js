@@ -20,10 +20,29 @@ app.controller('CyberdyneCoreController', function($scope, $http) {
 	};
 
   function setNotes() {
+    var notes = $("#notes");
+
     $http({method: 'GET', url: '/cyberdyne/api/v1/note'})
       .success(function(data, status, headers, config) {
-        $("#notes").html(data);
+        if (!data) return
+        notes.html(data.html);
       });
+
+
+    // update on changes
+    notes.bind("input", function(e) {
+      $http({
+          method: 'PATCH', 
+          url: '/cyberdyne/api/v1/note',
+          data: { html: notes.html() }
+
+        })
+        .success(function(data, status, headers, config) {
+        })
+        .error(function() {
+          console.log("Error updating notes...");
+        });
+    });
   }
 
 
@@ -54,8 +73,8 @@ app.controller('CyberdyneCoreController', function($scope, $http) {
         var x = w/2 + (r+padding)*Math.cos(2*Math.PI*(i/N) -t);
         var y = h/2 + (r+padding)*Math.sin(2*Math.PI*(i/N) -t);
         $(v).animate({ left: x, top: y }, 100);
-        t += 0.005;
-      }, 100);
+        t += 0.02;
+      }, 60);
     });
 
     $('.moon').mouseenter( function() {

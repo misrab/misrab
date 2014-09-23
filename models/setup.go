@@ -29,7 +29,9 @@ func SetupDB() *gorp.DbMap {
 
     // add a table, setting the table name to 'posts' and
     // specifying that the Id property is an auto incrementing PK
-    dbmap.AddTableWithName(Note{}, "rates").SetKeys(true, "Id") //.ColMap("Email").SetUnique(true)
+    dbmap.AddTableWithName(Note{}, "notes").SetKeys(true, "Id") //.ColMap("Email").SetUnique(true)
+   	
+
     //.SetKeys(false, "Email")
 
     // drop all tables for testing
@@ -42,7 +44,10 @@ func SetupDB() *gorp.DbMap {
     PanicIf(err2)
 	
     log.Println("Loading initial data...")
-    //loadRates(dbmap)
+    // insert the one note for use
+   	n := new(Note)
+   	err0 := dbmap.Insert(n)
+   	PanicIf(err0)
 
     return dbmap
 }

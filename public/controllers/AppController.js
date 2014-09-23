@@ -35,7 +35,7 @@ $cookieStore, Base64) {
 	function logout() {
 		$cookieStore.remove("key");
 		$http.defaults.headers.common.Authorization = 'Basic ';
-		$location.url('/cyberdyne');
+		$location.url('/');
 	};
 
 });

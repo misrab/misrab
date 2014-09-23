@@ -49,17 +49,17 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
 
 
   // 401 handling
-  var logsOutUserOn401 = ['$q', '$location', function ($q, $location) {
+  var logsOutUserOn401 = ['$q', '$location', '$cookieStore'
+  , function ($q, $location, $cookieStore) {
     var success = function (response) {
       return response;
     };
 
     var error = function (response) {
       if (response.status === 401) {
-        // display error
-        // $('.alert-danger').html('Invalid username or password');
-        // $('.alert-danger').show();
-        
+  
+      $cookieStore.remove('key');
+      // $http.defaults.headers.common.Authorization = 'Basic ';
       //redirect them back to login page
       $location.path('/');
 
