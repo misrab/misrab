@@ -35,18 +35,19 @@ func SetupDB() *gorp.DbMap {
     //.SetKeys(false, "Email")
 
     // drop all tables for testing
-    log.Println("Dropping tables...")
-	err1 := dbmap.DropTablesIfExists()
-	PanicIf(err1)
+    env := os.Getenv("ENV")
+    if env != "staging" && env != "production" {
+	    log.Println("Dropping tables...")
+		err1 := dbmap.DropTablesIfExists()
+		PanicIf(err1)
+	}
 
 	log.Println("Creating tables...")
     err2 := dbmap.CreateTablesIfNotExists()
     PanicIf(err2)
 	
     log.Println("Loading initial data...")
-
     // insert the one note for use
-    env := os.Getenv("ENV")
     if env != "staging" && env != "production" {
     	n := new(Note)
 	   	err0 := dbmap.Insert(n)
