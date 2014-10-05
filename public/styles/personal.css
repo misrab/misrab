@@ -24,7 +24,7 @@ body {
 #projects {
   background-color: #fe6f5e; }
 
-.fun {
+#fun {
   background-color: #ffbf00; }
 
 .white_box {
@@ -38,11 +38,11 @@ body {
   font-size: 1.5em;
   cursor: pointer; }
 
-.nav_blog:hover, .nav_projects:hover, .nav_resume:hover {
-  color: black; }
+.nav_projects:hover, .nav_resume a:hover, .nav_blog a:hover {
+  color: black !important; }
 
-.nav_blog {
-  color: #7bb661; }
+.nav_blog a {
+  color: #7bb661 !important; }
 
 .nav_projects {
   color: #fe6f5e; }

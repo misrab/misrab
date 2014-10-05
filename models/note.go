@@ -9,21 +9,11 @@ import (
 )
 
 
-// type Rate struct {
-// 	Id       	int64	`db:"rate_id"`
-//     Created  	int64
-//     Updated  	int64
-
-//     Code  		string      // county code e.g. USD
-//     Value 		float64     // USD:X rate e.g. 2.04
-//     Date        string      // e.g. 2011-02-20
-// }
-
 // notes
 type Note struct {
-    Id          int64   `db:"id"`
-    Created     int64
-    Updated     int64
+    Id          int64   `db:"id" json:"id"`
+    Created     int64   `db:"created" json:"created"`
+    Updated     int64   `db:"updated" json:"updated"`
 
     Html        string  `json:"html"`
 }

@@ -5,12 +5,13 @@ var app = angular.module('app');
 //     });
 
 
-app.controller('CyberdyneCoreController', function($scope, $http) {
+app.controller('CyberdyneCoreController', function($scope, $http, GenericService) {
 	init();
 
 	function init() {
-
-    setNotes();
+    showNotes();
+    $("#notes_save").click(saveNote);
+    $("#readings_add").click(saveReading);
 
     $(function() {
       effects();
@@ -19,33 +20,149 @@ app.controller('CyberdyneCoreController', function($scope, $http) {
     
 	};
 
-  function setNotes() {
-    var notes = $("#notes");
 
-    $http({method: 'GET', url: '/cyberdyne/api/v1/note'})
-      .success(function(data, status, headers, config) {
-        if (!data) return
-        notes.html(data.html);
-      });
-
-
-    // update on changes
-    notes.bind("input", function(e) {
+  /*
+    Generic
+  */
+  function rebindRemove() {
+    $('.remove').unbind('click');
+    $('.remove').click(function(e) {
+      var parent = $(this).parent();
+      var id = parent.children('input[name="id"]').val();
+      var type = parent.attr('class');
+      
+      // remove it
+      var url = '/cyberdyne/api/v1/' + type + '/' + id;
       $http({
-          method: 'PATCH', 
-          url: '/cyberdyne/api/v1/note',
-          data: { html: notes.html() }
-
-        })
-        .success(function(data, status, headers, config) {
-        })
-        .error(function() {
-          console.log("Error updating notes...");
-        });
+        method: 'DELETE', 
+        url: url
+      })
+      .success(function(data, status, headers, config) {
+        parent.remove();
+      })
+      .error(function() {
+        console.log("Error updating notes...");
+      });
     });
-  }
+  };
+
+  // returns html of an object with class for each field
+  // expect object id, date as unix
+  function renderObject(type, date, obj) {
+    var html = '<div class="'+ type +'">'
+        + '<input type="hidden" name="id" value="'+ obj.id +'" />'
+        + '<div class="time">' + date.toUTCString() + '</div>'
+        + '<a href="" class="remove">Remove</a>';
+
+    for (k in obj) {
+      if (["id", "created", "updated"].indexOf(k) !== -1) continue;
+      html = html + '<div class="' + k + '">' + obj[k] + '</div>';
+    }
+
+    html = html + '</div>';
+    return html;
+  };
+  
+
+  /*
+    Readings
+  */
 
 
+  /*
+    Notes
+  */
+  function renderNote(note) {
+    var input = $("#notes");
+    var date = new Date(note.created/1000000);
+    var html = renderObject('note', date, note);
+    input.after(html);
+  };
+
+  function showNotes() {
+    $http({
+        method: 'GET', 
+        url: '/cyberdyne/api/v1/notes'
+      })
+      .success(function(data, status, headers, config) {
+        if (!data) return;
+
+        // show the notes
+        for (var i=0; i < data.length; i++) {
+          renderNote(data[i]);
+        }
+
+        rebindRemove();
+      })
+      .error(function() {
+        console.log("Error updating notes...");
+      });
+  };
+
+  function saveNote(e) {
+    e.preventDefault();
+
+    var notes = $("#notes");
+    var html = notes.val();
+    // var note = {
+    //   html: html,
+    //   created: (new Date).getTime()
+    // };
+
+    $http({
+        method: 'POST', 
+        url: '/cyberdyne/api/v1/note',
+        data: { 
+          html: html
+        }
+      })
+      .success(function(data, status, headers, config) {
+        // show it
+        renderNote(data);
+        rebindRemove();
+      })
+      .error(function() {
+        console.log("Error updating notes...");
+      });
+  };
+
+  // function setReadings() {
+  //   // first bind the reading add button
+
+
+  // };
+  // function addReading() {
+
+  // };
+
+  
+  
+  // function setNotes() {
+  //   var notes = $("#notes");
+  //   $http({method: 'GET', url: '/cyberdyne/api/v1/note'})
+  //     .success(function(data, status, headers, config) {
+  //       if (!data) return
+  //       notes.html(data.html);
+  //     });
+
+  //   // update on changes
+  //   $("#notes_save").bind("click", updateNotes);
+  // };
+  // function updateNotes(e) {
+  //   var notes = $("#notes");
+  //   $http({
+  //       method: 'PATCH', 
+  //       url: '/cyberdyne/api/v1/note',
+  //       data: { html: notes.html() }
+
+  //     })
+  //     .success(function(data, status, headers, config) {
+
+  //     })
+  //     .error(function() {
+  //       console.log("Error updating notes...");
+  //     });
+  // };
 
 
   // add icons for various parts of system

@@ -20,19 +20,32 @@
 	<div style="height: 100%;" class="row big_space_top text-center">
 		<div class="col-md-4">
 			<h3 style="margin-bottom: 30px;">Notes</h3>
-			<div id="notes" contenteditable="true" class="text-left"></div>
+			<button id="notes_save" style="position: absolute; top: 30px; right: 15px;" class="btn btn-default">Save</button>
+			<textarea id="notes" contenteditable="true" class="full_width text-left"></textarea>
 		</div>
 		<div class="col-md-4">
 		</div>
 		<div class="col-md-4 text-center">
-			<h3 style="margin-bottom: 30px;">Applications</h3>
-			<button class="btn btn-default boxy full_width">
-				<h4>Analytics</h4>
-			</button>
+			<!-- applications -->
+			<div>
+				<h3 style="margin-bottom: 30px;">Applications</h3>
+				<button class="btn btn-default boxy full_width">
+					<h4>Analytics</h4>
+				</button>
 
-			<button class="btn btn-default boxy full_width big_space_top">
-				<h4>Satchel</h4>
-			</button>
+				<button class="btn btn-default boxy full_width big_space_top">
+					<h4>Satchel</h4>
+				</button>
+			</div>
+
+			<!-- Reading -->
+			<div style="position: relative;">
+				<h3 style="margin-bottom: 30px;">Reading</h3>
+
+				<input name="link" type="text" class="form-control" placeholder="Link or reference the reading..." />
+				<textarea name="description" placeholder="Describe the reading..." class="form-control small_space_top"></textarea>
+				<button style="position: absolute; top: 0px; right: 0px;" class="btn btn-default">Add</button>
+			</div>
 		</div>
 	</div>
 </div>

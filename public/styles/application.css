@@ -37,6 +37,9 @@ a, a:hover {
 .medium_space_top {
   margin-top: 20px; }
 
+.small_space_top {
+  margin-top: 10px; }
+
 .full_width {
   width: 100%; }
 

@@ -30,7 +30,7 @@ func SetupDB() *gorp.DbMap {
     // add a table, setting the table name to 'posts' and
     // specifying that the Id property is an auto incrementing PK
     dbmap.AddTableWithName(Note{}, "notes").SetKeys(true, "Id") //.ColMap("Email").SetUnique(true)
-   	
+   	dbmap.AddTableWithName(Reading{}, "readings").SetKeys(true, "Id")
 
     //.SetKeys(false, "Email")
 
@@ -47,14 +47,15 @@ func SetupDB() *gorp.DbMap {
     PanicIf(err2)
 	
     log.Println("Loading initial data...")
-    // insert the one note for use
-    if env != "staging" && env != "production" {
-    	n := new(Note)
-	   	err0 := dbmap.Insert(n)
-	   	PanicIf(err0)
-    }
    	
+ //   	if env != "staging" && env != "production" {
+	// 	// insert the one note for use
+	// 	n := new(Note)
+	//    	err0 := dbmap.Insert(n)
+	//    	PanicIf(err0)
+	// }
 
+	
     return dbmap
 }
 

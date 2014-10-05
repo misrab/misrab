@@ -2,7 +2,7 @@ var app = angular.module('app');
 
 
 app.controller('CyberdyneLandingController', function($location, $rootScope, $scope, 
-	$cookieStore, Base64) {
+	$cookieStore, Base64, GenericService) {
 	init();
 
 	function init() {
@@ -10,14 +10,7 @@ app.controller('CyberdyneLandingController', function($location, $rootScope, $sc
 
 	};
 
-	// shows alert warning for a moment
-	function alert() {
-		var spot = $('.alert-danger');
-		spot.slideDown();
-		setTimeout(function() {
-			spot.slideUp();
-		}, 3000);
-	}
+	
 	function enterPassword() {
 		var data = {};
 		data.password = Base64.encode($('input[type="password"]').val());
@@ -35,11 +28,11 @@ app.controller('CyberdyneLandingController', function($location, $rootScope, $sc
 		  		$rootScope.setHttpBasicHeaders();
 		  		$location.url("/cyberdyne/core");
 		  	} else {
-		  		alert();
+		  		GenericService.alert('danger', 'You have entered an incorrect password. This incident has been reported.');
 		  	}
 		  },
 		  error: function() {
-		  	alert();
+		  	GenericService.alert('danger', 'You have entered an incorrect password. This incident has been reported.');
 		  }
 		});
 	};
