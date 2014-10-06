@@ -1,5 +1,5 @@
 $admin-primary: #333333
-
+$apple-green: #8DB600
 
 body
 	background-color: $admin-primary
@@ -12,18 +12,21 @@ body
 	border: 1px solid grey
 	font-size: 1.25em
 
-.note
+.note, .reading
 	background-color: #e2e2e2
 	width: 100%
 	color: black
 	padding: 10px
 	margin: 10px 0
 	font-size: 1.5em
+	&.read
+		background-color: $apple-green
 	.time, .remove
 		display: block
 		text-align: right
 		font-style: italic
 		font-size: 0.5em
+
 
 .neural_dot
 	position: absolute

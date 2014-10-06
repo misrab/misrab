@@ -10,6 +10,7 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
 
 	function init() {
     showNotes();
+    showReadings();
     $("#notes_save").click(saveNote);
     $("#readings_add").click(saveReading);
 
@@ -24,12 +25,18 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
   /*
     Generic
   */
+
+  // remove url based on class
+  // if added extra classes will need to remove them here
   function rebindRemove() {
     $('.remove').unbind('click');
     $('.remove').click(function(e) {
       var parent = $(this).parent();
       var id = parent.children('input[name="id"]').val();
       var type = parent.attr('class');
+
+      // filter extra classes
+      if (type.indexOf("read") >= 0) type = "reading";
       
       // remove it
       var url = '/cyberdyne/api/v1/' + type + '/' + id;
@@ -49,15 +56,30 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
   // returns html of an object with class for each field
   // expect object id, date as unix
   function renderObject(type, date, obj) {
+    // if a reading add read or unread as a class
+    var extras;
+    if (type==="reading") {
+      var read = obj.read ? "read" : "unread";
+      type = type + " " + read;
+
+      // also add button to tick as read
+      extras = '<button name="toggle" style="right: 0;" class="glyphicon glyphicon-ok"></button>';
+    }
+
     var html = '<div class="'+ type +'">'
         + '<input type="hidden" name="id" value="'+ obj.id +'" />'
         + '<div class="time">' + date.toUTCString() + '</div>'
-        + '<a href="" class="remove">Remove</a>';
+        + '<a href="" class="remove">Remove</a>'
+        + extras;
+
+
+
 
     for (k in obj) {
-      if (["id", "created", "updated"].indexOf(k) !== -1) continue;
+      if (["id", "created", "updated", "read"].indexOf(k) !== -1) continue;
       html = html + '<div class="' + k + '">' + obj[k] + '</div>';
     }
+
 
     html = html + '</div>';
     return html;
@@ -69,9 +91,102 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
   */
 
 
+  function rebindReadingToggle() {
+    
+
+    var buttons = $('.reading button[name="toggle"]');
+    buttons.unbind('click');
+    buttons.click(function(e) {
+      e.preventDefault();
+
+      var reading = $(this).parent();
+      var id = reading.children('input[name="id"]').val();
+      var url = '/cyberdyne/api/v1/reading/toggleRead/' + id;
+      
+      // update on server
+      $http({
+        method: 'PATCH', 
+        url: url
+      })
+      .success(function(data, status, headers, config) {
+        if (!data) return;
+
+        // update color
+        if (data.read) {
+          reading.removeClass("unread");
+          reading.addClass("read");
+        } else {
+          reading.removeClass("read");
+          reading.addClass("unread");
+        }
+      })
+      .error(function() {
+        console.log("Error saving reading...");
+      });
+
+
+    });
+  };
+
+  function saveReading(e) {
+    e.preventDefault();
+
+
+    //var notes = $("#notes");
+    var link = $('#reading input[name="link"]').val();
+    var description = $('#reading input[name="description"]').val();
+
+    $http({
+        method: 'POST', 
+        url: '/cyberdyne/api/v1/reading',
+        data: { 
+          link: link,
+          description: description
+        }
+      })
+      .success(function(data, status, headers, config) {
+        // show it
+        renderReading(data);
+        rebindRemove();
+        rebindReadingToggle();
+      })
+      .error(function() {
+        console.log("Error saving reading...");
+      });
+  };
+
+  function showReadings() {
+    $http({
+        method: 'GET', 
+        url: '/cyberdyne/api/v1/readings'
+      })
+      .success(function(data, status, headers, config) {
+        if (!data) return;
+
+        // show the notes
+        for (var i=0; i < data.length; i++) {
+          renderReading(data[i]);
+        }
+
+        rebindRemove();
+        rebindReadingToggle();
+      })
+      .error(function() {
+        console.log("Error showing readings...");
+      });
+  };
+
+  function renderReading(reading) {
+    var slot = $("#reading");
+    var date = new Date(reading.created/1000000);
+    var html = renderObject('reading', date, reading);
+    slot.after(html);
+  };
+
   /*
     Notes
   */
+
   function renderNote(note) {
     var input = $("#notes");
     var date = new Date(note.created/1000000);
@@ -104,10 +219,6 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
 
     var notes = $("#notes");
     var html = notes.val();
-    // var note = {
-    //   html: html,
-    //   created: (new Date).getTime()
-    // };
 
     $http({
         method: 'POST', 
@@ -126,44 +237,11 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
       });
   };
 
-  // function setReadings() {
-  //   // first bind the reading add button
 
 
-  // };
-  // function addReading() {
-
-  // };
-
-  
-  
-  // function setNotes() {
-  //   var notes = $("#notes");
-  //   $http({method: 'GET', url: '/cyberdyne/api/v1/note'})
-  //     .success(function(data, status, headers, config) {
-  //       if (!data) return
-  //       notes.html(data.html);
-  //     });
-
-  //   // update on changes
-  //   $("#notes_save").bind("click", updateNotes);
-  // };
-  // function updateNotes(e) {
-  //   var notes = $("#notes");
-  //   $http({
-  //       method: 'PATCH', 
-  //       url: '/cyberdyne/api/v1/note',
-  //       data: { html: notes.html() }
-
-  //     })
-  //     .success(function(data, status, headers, config) {
-
-  //     })
-  //     .error(function() {
-  //       console.log("Error updating notes...");
-  //     });
-  // };
-
+  /*
+    Effects
+  */
 
   // add icons for various parts of system
   function icons() {

@@ -9,14 +9,16 @@ body {
   border: 1px solid gray;
   font-size: 1.25em; }
 
-.note {
+.note, .reading {
   background-color: #e2e2e2;
   width: 100%;
   color: black;
   padding: 10px;
   margin: 10px 0;
   font-size: 1.5em; }
-  .note .time, .note .remove {
+  .note.read, .reading.read {
+    background-color: #8db600; }
+  .note .time, .note .remove, .reading .time, .reading .remove {
     display: block;
     text-align: right;
     font-style: italic;
