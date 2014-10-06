@@ -57,7 +57,7 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
   // expect object id, date as unix
   function renderObject(type, date, obj) {
     // if a reading add read or unread as a class
-    var extras;
+    var extras = "";
     if (type==="reading") {
       var read = obj.read ? "read" : "unread";
       type = type + " " + read;
