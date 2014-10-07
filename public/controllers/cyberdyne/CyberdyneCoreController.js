@@ -64,6 +64,9 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
 
       // also add button to tick as read
       extras = '<button name="toggle" style="right: 0;" class="glyphicon glyphicon-ok"></button>';
+    
+      // add link
+      extras = extras + '<a target="_blank" class="left_right_margin" href="'+obj.link+'">Link</a>';
     }
 
     var html = '<div class="'+ type +'">'
@@ -76,7 +79,7 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
 
 
     for (k in obj) {
-      if (["id", "created", "updated", "read"].indexOf(k) !== -1) continue;
+      if (["id", "created", "updated", "read", "link"].indexOf(k) !== -1) continue;
       html = html + '<div class="' + k + '">' + obj[k] + '</div>';
     }
 
@@ -134,7 +137,10 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
 
     //var notes = $("#notes");
     var link = $('#reading input[name="link"]').val();
-    var description = $('#reading input[name="description"]').val();
+    var description = $('#reading textarea[name="description"]').val();
+
+    console.log("description");
+    console.log(description);
 
     $http({
         method: 'POST', 

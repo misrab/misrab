@@ -40,6 +40,10 @@ a, a:hover {
 .small_space_top {
   margin-top: 10px; }
 
+.left_right_margin {
+  margin-right: 10px;
+  margin-left: 10px; }
+
 .full_width {
   width: 100%; }
 
