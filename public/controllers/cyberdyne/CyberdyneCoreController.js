@@ -139,8 +139,6 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
     var link = $('#reading input[name="link"]').val();
     var description = $('#reading textarea[name="description"]').val();
 
-    console.log("description");
-    console.log(description);
 
     $http({
         method: 'POST', 
@@ -155,6 +153,10 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
         renderReading(data);
         rebindRemove();
         rebindReadingToggle();
+
+        // clear fields
+        $('#reading input[name="link"]').val('');
+        $('#reading textarea[name="description"]').val('');
       })
       .error(function() {
         console.log("Error saving reading...");
@@ -237,6 +239,9 @@ app.controller('CyberdyneCoreController', function($scope, $http, GenericService
         // show it
         renderNote(data);
         rebindRemove();
+
+        //clear fields
+        notes.val('');
       })
       .error(function() {
         console.log("Error updating notes...");
